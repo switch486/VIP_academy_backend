@@ -44,22 +44,6 @@
 					<h3>Backend</h3>
 				</section>
 
-				<section>
-					<h2>Agenda</h2>
-					<ol>
-						<li>Spring Framework</li>
-						<li>Maven</li>
-						<li>Spring Boot</li>
-						<li>Architektura wielowarstwowa</li>
-						<li>RESTful Services</li>
-						<li>Relacyjne bazy danych a świat obiektowy</li>
-						<li>Dostęp do danych za pomocą JDBC</li>
-						<li>Odwzorowanie obiektowo-relacyjne</li>
-						<li>DAO</li>
-						<li>Transakcje</li>
-						<li>Testy</li>
-					</ol>
-				</section>
 				
 
 			</div>
