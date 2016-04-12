@@ -207,18 +207,150 @@ public class CustomerServiceImpl {
 				
 				
 				<!--     Relacyjne bazy danych a świat obiektowy     -->
-				
+				<section>
+				<h4>Relacyjne bazy danych a świat obiektowy</h4>
+					<ul>
+						<li>Aplikacje tworzą, zarządzają i przechowują informacje strukturalne
+						<li>Programiści wybierają języki obiektowe
+						<li>Zapisywanie i pobieranie danych wymaga znajomości SQL	
+					</ul>
+					
+					<img src="images/objectVSsql.png" style="background:none; border:none; box-shadow:none;">
+				</section>
 				
 				
 				
 				<!--     Dostęp do danych za pomocą JDBC     -->
 				
+				<section>
+				<h3>Dostęp do danych za pomocą JDBC</h3>
+					<ul>
+						<li>Bardzo dobrze znane API
+						<li>Wymaga dobrej znajomości SQL
+						<li>Łącze do baz danych dla języka Java	
+					</ul>
+					
+					<img src="images/jdbc.png" style="background:none; border:none; box-shadow:none;">
+				</section>
+				
+				<section>
+				<h3>JDBC - jak to działa</h3>
+				
+					<pre><code class="Java" data-trim>
+@Service public class CustomerServiceImpl {
+
+   private static final String FIND_ALL_LIBRARIES_IN_CITY_SQL =
+      "SELECT l.id, l.name, l.address_id FROM Library l, Address a 
+       WHERE l.address_id = a.id AND a.city = :city";
+   
+   @Autowired private NamedParameterJdbcOperations jdbcTemplate;
+   @Autowired private LibraryRowMapper mapper;
+   
+   public List&lt;LibraryTO&gt; findAllLibrariesInCity (String cityName) {
+      SqlParameterSource params = new MapSqlParameterSource("city", cityName);
+      return jdbcTemplate.query(FIND_ALL_LIBRARIES_IN_CITY_SQL, params, mapper);
+   }
+					</code></pre>				
+				
+					<ul>
+						<li>Konieczność definiowania zapytań SQL
+						<li>Spring NamedParameterJdbcOperations do wykonywania instrukcji SQL
+						<li>Spring RowMapper do mapowania wyniku zapytania na obiekt	
+					</ul>
+				</section>
 				
 				
+				<section>
+				<h3>JDBC - spring RowMapper</h3>
+				Implementacja interfejsu RowMapper
+					<pre><code class="Java" data-trim>
+@Component
+public class LibraryRowMapper implements RowMapper&lt;LibraryTO&gt; {
+
+   @Override
+   public LibraryTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+      LibraryTO library = new LibraryTO();
+      library.setId(rs.getLong(1));
+      library.setName(rs.getString(2));
+      library.setAddress(mapAddressById(rs.getLong(3)));
+      return library;
+   }
+   
+   private AddressTO mapAddressById(Long addressId) {
+      if (addressId != null && Long.compare(0, addressId) != 0)
+        return new AddressTO(addressId));
+      return null;
+   }
+					</code></pre>				
+				
+					
+				</section>
+				
+				<section>
+				<h3>JDBC - wady</h3>
+					<ul>
+						<li>Wymaga pisania dużej ilości dodatkowego kodu
+						<li>Trudne mapowanie wyniku SQL na obiekty biznesowe
+						<li>Kod związany z trwałością danych narażony na błędy programistów
+						<li>Brak przenośności kodu, implementacja zależna od bazy danych
+						<li>Implementacja bardzo trudna w utrzymaniu
+						<li>Ewentualne błędy w zapytaniach SQL widoczne dopiero w trakcie działania programu
+						<li>Kod nietestowalny
+					</ul>
+				</section>				
 				
 				<!--     Odwzorowanie obiektowo-relacyjne     -->
 				
+				<section>
+				<h3>Odwzorowanie obiektowo-relacyjne</h3>
+					<ul>
+						<li>Przekształcenie obiektów w encje bazy danych i odwrotnie
+ 						<li>Przekształcenie połączeń między obiektami na relacje bazy danych
+ 						<li>Przekształcenie obiektowego języka zapytań na SQL
+ 						<li>Spójny sposób obsługi różnych baz danych - przenośność
+ 						<li>Zapewnienie trwałości obiektów
+ 						<li>Ochrona programisty przed czasochłonnym SQL-em
+ 						<li>Pozwala skupić się na implementacji logiki biznesowej
+ 						<li>Zapewnienie stałych technik optymalizacyjnych
+ 						<li>Oddzielenie warstwy dostępu do danych od biznesu
+					</ul>
+				</section>
 				
+				<section>
+				<h4>Odwzorowanie obiektowo-relacyjne</h4>
+				Niedopasowanie paradygmatów relacyjno-obiektowych	
+					<table>
+						<thead>
+							<tr>
+								<th>Podobieństwa</th>
+								<th>Różnice</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Klasy i tabele</td>
+								<td>Szczegółowość</td> 
+							</tr>
+							<tr>
+								<td>Właściwości i kolumny</td>
+								<td>Dziedziczenie (java)</td> 
+							</tr>
+							<tr>
+								<td>Instancje i wiersze</td>
+								<td>Kolekcje (java)</td> 
+							</tr>
+							<tr>
+								<td></td>
+								<td>Identyczność (==, equals vs PK)</td> 
+							</tr>
+							<tr>
+								<td></td>
+								<td>Nawigacja po grafie obiektów</td> 
+							</tr>
+						</tbody>
+					</table>
+					<p class="fragment">Podstawowym zadaniem ORM jest rozwiązanie wrodzonych niezgodności pomiędzy obiektami i bazami danych</p>
+				</section>
 				
 				
 				<!--     DAO     -->
