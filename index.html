@@ -189,21 +189,32 @@ public class CustomerServiceImpl {
 				<!--     Maven     -->
 				
 				
-				
-				
 				<!--     Spring Boot     -->
 				
+								
+				<section>
+				<h3>TODO? - Spring boot</h3>
+				</section>				
+								
+				<section>
+				<h3>TODO? - Spring boot / Startery</h3>
+				</section>				
+								
+				<section>
+				<h3>TODO? - Spring boot / embedded vs Classical Server</h3>
+				</section>
 				
+				
+				<!--     ZADANIE DO WYKONANIA start.spring.io      -->
 				
 				
 				<!--     Architektura wielowarstwowa     -->
 				
 				
-				
-				
 				<!--     RESTful Services     -->
 				
 				
+				<!--     ZADANIE DO WYKONANIA Rest      -->
 				
 				
 				<!--     Relacyjne bazy danych a świat obiektowy     -->
@@ -352,18 +363,135 @@ public class LibraryRowMapper implements RowMapper&lt;LibraryTO&gt; {
 					<p class="fragment">Podstawowym zadaniem ORM jest rozwiązanie wrodzonych niezgodności pomiędzy obiektami i bazami danych</p>
 				</section>
 				
+				<section>
+				<h3>TODO? - Hibernate - co to takiego</h3>
+				</section>
+				
+				<section>
+				<h3>TODO? - Hibernate a JPA</h3>
+				</section>
+				
+				<section>
+				<h3>TODO? - Mapowanie JPA</h3>
+				</section>
+				
+				<section>
+				<h3>Encja a <b>POJO</b></h3>
+				
+									<pre><code class="Java" data-trim>
+public class LibraryEntity {
+	private String name;
+	private String domain;
+
+	public LibraryEntity () {
+	}
+
+	public String getName() { return name; }
+
+	public void setName(String name) { this.name = name; }
+	
+	public String getDomain() { return domain; }
+
+	public void setDomain(String domain) { this. domain = domain; }
+}
+					</code></pre>
+				</section>
+				
+				<section>
+				<h3><b>Encja</b> a POJO</h3>
+				
+									<pre><code class="Java" data-trim>
+@Entity
+public class LibraryEntity {
+
+	@Id
+	private Long id;
+	
+	@Column(name = "name", length = 30, nullable = false)
+	private String name;
+	
+	@Column(name = "domain", length = 5, nullable = true)
+	private String domain;
+	
+	public LibraryEntity () {
+	}
+	
+	// getters and setters
+}
+
+					</code></pre>
+				</section>
+				
+				<section>
+				<h4>Adnotacje dla Encji</h4>
+				
+									<pre><code class="Java" data-trim>
+@Entity
+@Table(name = "LIBRARY", schema = "public")
+@Access(AccessType.FIELD)
+public class LibraryEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	
+	@Column(name = "name", length = 30, nullable = false)
+	private String name;
+	
+	@Lob
+	@Column(nullable = false)
+	private String description;
+	
+	private String city;
+	
+	@Access(AccessType.PROPERTY)
+	public String getCity ()  { ... }
+	
+	public LibraryEntity ()  { }
+	
+}
+					</code></pre>
+				</section>
+				
+				<section>
+				<h4>Adnotacje dla Encji</h4>
+					<ul>
+						<li><b>@Entity</b> - oznacza klasę, odzwierciedla tabelę BD
+						<li><b>@Entity(name="…")</b> - nigdy nie używać
+						<li><b>@Access</b> - decyduje gdzie umieszczać adnotacje
+						<li><b>@Table</b> - zmienia domyślną nazwę tabeli BD
+						<li><b>@Id</b> - oznacza atrybut jako klucz główny
+						<li><b>@GeneratedValue</b> - auto generacja wartości PK
+						<li><b>@Column</b> - pozwala ustawić wartości kolumny
+						<li><b>@Lob</b> - typ dla dużych danych tekstowych
+						<li><b>@Enumerated(EnumType.STRING)</b> - enumy
+						<li><b>@Transient</b> - wyłączenie pola z persystencji
+						<li><b>@MappedSuperclas</b> - zwykłe dziedziczenie
+					</ul>
+					
+					
+				</section>
+				
+				
+				<!--     ZADANIE DO WYKONANIA BookEntity      -->
+				
 				
 				<!--     DAO     -->
 				
 				
+				<!--     ZADANIE DO WYKONANIA BookDao      -->
 				
 				
 				<!--     Transakcje     -->
 				
 				
+				<!--     ZADANIE DO WYKONANIA BookService      -->
 				
 				
 				<!--     Testy     -->
+				
+				
+				<!--     ZADANIE DO WYKONANIA Mockito      -->
 				
 				
 				
