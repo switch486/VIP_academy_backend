@@ -714,23 +714,163 @@ Product product = em.createQuery(
 				</section>
 				
 				<section>
-				<h3>TODO? - Relacje?</h3>
+				<h3>Relacje</h3>
+					<ul>
+						<li><b>@OneToOne</b> – encja A może mieć relację do dokładnie jednej encji B
+						<li><b>@OneToMany</b> – encja A może mieć relację do kilku encji B
+						<li><b>@ManyToOne</b> – wiele encji A może mieć relację do dokładnie jednej encji B
+						<li><b>@ManyToMany</b> – wiele encji A może mieć relację do wielu encji B
+						<ul><li>Tworzy tabelę asocjacyjną</ul>
+					</ul>
+				</section>	
+				
+				<section>
+				<h3>Relacje</h3>
+					<ul>
+						<li>Wyróżniamy relacje:
+						<ul>
+							<li>jednokierunkowe
+							<li> dwukierunkowe
+						</ul>
+					</ul>
 				</section>
 				
 				<section>
-				<h3>TODO? - one to one?</h3>
+				<h3>@OneToOne - jednokierunkowa</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+public class User {
+
+	@OneToOne(
+		cascade = CascadeType.ALL, // default: empty
+		fetch = FetchType.LAZY, // default: EAGER
+		optional = false) // default: true
+	private Address address;
+}
+					</code></pre>
+				<pre><code class="Java" data-trim>
+@Entity
+public class Address {
+}
+
+					</code></pre>
+				</section>
+								
+				<section>
+				<h3>@OneToOne - dwukierunkowa</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+public class User {
+
+	@OneToOne
+	@JoinColumn(name = "BOOK_FK")
+	private Address address;
+}
+
+					</code></pre>
+				<pre><code class="Java" data-trim>
+@Entity
+public class Address {
+
+	@OneToOne(mappedBy = „address”)
+	private User user;
+}
+					</code></pre>
+					<ul>
+						<li><b>mappedBy</b> określa właściciela relacji
+						<li>użytkownik ma klucz obcy do adresu
+						<li>bez mappedBy klucz obcy po obu stronach
+					</ul>
 				</section>
 				
 				<section>
-				<h3>TODO? - One to many</h3>
+				<h3>@OneToMany / @ManyToOne - jednokierunkowa</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+public class User {
+
+	@OneToMany(
+	cascade = CascadeType.ALL, // default: empty
+	fetch = FetchType. EAGER) // default: LAZY
+	@JoinColumn(name = "user_id")
+	private Collection&lt;Address&gt; addresses;
+}
+
+					</code></pre>
+				<pre><code class="Java" data-trim>
+@Entity
+public class Address {
+}
+					</code></pre>
+					<ul>
+						<li>bez <b>@JoinColumn</b> utworzona zostanie tabela asocjacyjna
+					</ul>
+				</section>
+				
+				
+				
+				<section>
+				<h3>@OneToMany / @ManyToOne - dwukierunkowa</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+public class User {
+
+	@OneToMany(mappedBy = "user")
+	private Collection&lt;Address&gt; addresses;
+}
+
+					</code></pre>
+				<pre><code class="Java" data-trim>
+@Entity
+public class Address {
+
+	@ManyToOne
+	@JoinColumn(name = "BOOK_FK", nullable = false)
+	private User user;
+}
+					</code></pre>
+					<ul>
+						<li>mappedBy tak samo jak <b>@JoinColumn</b> usuwa tabelę asocjacyjną
+					</ul>
 				</section>
 				
 				<section>
-				<h3>TODO? - Many to one</h3>
+				<h3>@ManyToMany - jednokierunkowa</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+public class User {
+
+	@ManyToMany(
+		cascade = CascadeType.ALL, // default: empty
+		fetch = FetchType. LAZY) // default: EAGER    
+	@JoinTable(name = "USER_ADDRESS",
+		joinColumns = {@JoinColumn(
+			name = "BOOK_ID", 
+			nullable = false, 
+			updatable = false)},
+		inverseJoinColumns = {@JoinColumn(
+			name = "AUTHOR_ID", 
+			nullable = false, 
+			updatable = false)})
+	private Collection&lt;Address&gt; addresses;
+}
+					</code></pre>
 				</section>
 				
 				<section>
-				<h3>TODO? - Many to many</h3>
+				<h3>@ManyToMany - dwukierunkowa</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+public class Address {
+
+    @ManyToMany(mappedBy = "book")
+    private Collection&lt;User&gt; users;
+}
+					</code></pre>
+
+					<ul>
+						<li>bez mappedBy dwie tabele asocjacyjne zostaną stworzone
+					</ul>
 				</section>
 				
 				<section>
