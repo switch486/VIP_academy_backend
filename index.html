@@ -498,17 +498,82 @@ public class LibraryEntity {
 				
 				<section>
 				<h4>Typy Embedded</h4>
-					...
+					<pre><code class="Java" data-trim>
+@Embeddable
+public class PersonalData  {
+
+ private String firstName;
+ 
+ private String lastName;
+ 
+ @Column (columnDefinition=" DATE", nullable = false)
+ private Date birthDate;
+
+ public PersonalData()  {
+ }
+ 
+ // getters & setters     
+ 
+}
+					</code></pre>
 				</section>
 				
 				<section>
 				<h4>Typy Embedded</h4>
-					...2
+					<pre><code class="Java" data-trim>
+@Entity
+public class AuthorEntity  {
+
+  @Embedded
+  @AttributeOverrides({
+       @AttributeOverride(
+           name = "firstName", 
+           column = @Column(
+              name = "FIRST_NAME", 
+              nullable = false)),
+       @AttributeOverride(
+           name = "lastName",
+           column = @Column(
+       	      name = "LAST_NAME", 
+       	      nullable = false))})
+  vate PersonalData personalData;
+  
+  ...
+}
+					</code></pre>
 				</section>
 				
 				<section>
-				<h4>Generowanie kluczy głównych</h4>
-					...
+				<h3>Generowanie kluczy głównych - Strategie</h3>
+					<pre><code class="Java" data-trim>
+					
+   @Id
+   @GeneratedValue(strategy = GenerationType.AUTO)
+   private Long id;
+					</code></pre>
+					<pre><code class="Java" data-trim>
+					
+   @Id
+   @SequenceGenerator(name = "bookGen", sequenceName = "BOOK_SEQ")
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookGen")
+   private Long id;
+					</code></pre>
+				</section>
+				
+				<section>
+				<h3>Generowanie kluczy głównych - Strategie</h3>
+					<pre><code class="Java" data-trim>
+					
+    @Id
+    @TableGenerator(
+         name="bookGen",
+         table="ID_GEN", // opcjonalnie
+         pkColumnName="GEN_KEY", // opcjonalnie
+         valueColumnName="GEN_VALUE", // opcjonalnie
+         pkColumnValue="BOOK_ID_GEN") // opcjonalnie
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "bookGen")
+    private Long id;
+					</code></pre>
 				</section>
 				
 				<section>
