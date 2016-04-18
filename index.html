@@ -43,6 +43,12 @@
 					<h1>VIP Academy</h1>
 					<h3>Backend</h3>
 				</section>
+				
+				
+				<section>
+					<h1>AGENDA z podziałem na czas TODO</h1>
+					<h3>Backend</h3>
+				</section>
 
 				<section>
 					<h2>Agenda</h2>
@@ -555,7 +561,8 @@ public class AuthorEntity  {
 					
    @Id
    @SequenceGenerator(name = "bookGen", sequenceName = "BOOK_SEQ")
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "bookGen")
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, 
+					generator = "bookGen")
    private Long id;
 					</code></pre>
 				</section>
@@ -874,47 +881,180 @@ public class Address {
 				</section>
 				
 				<section>
-				<h3>TODO? - Kaskady</h3>
+				<h3>Kaskady</h3>
+					<ul>
+						<li>Entity Manager dokonuje zmian na danej encji, np. persist
+						<li>Kaskady umożliwiają operację na encji połączonej relacją
+						<ul>
+							<li><b>PERSIST      </b>
+							<li><b>MERGE        </b>
+							<li><b>REMOVE       </b>
+							<li><b>ALL          </b>
+						</ul>
+					</ul>				
 				</section>
 				
 				<section>
-				<h3>TODO? - Dziedziczenie</h3>
+				<h3>Kaskady</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+@Table(name = "BOOK")
+public class BookEntity  {
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "book")
+    private BookSpoilerEntity bookSpoiler;
+	
+}
+					</code></pre>			
+				</section>
+				
+				<!-- TODO orphan removal?\ -->
+				
+				<section>
+				<h3>Dziedziczenie</h3>
+					<ul>
+						<li>Naturalna właściwość obiektów
+						<li>Nie ma zastosowania w relacyjnych bazach danych
+						<li>Rozwiązaniem Hibernate są trzy strategie:
+						<ul>
+							<li><b>SINGLE_TABLE        </b>
+							<li><b>TABLE_PER_CLASS       </b>
+							<li><b>JOINED          </b>
+						</ul>
+						<li>Możliwość wykonywania zapytań polimorficznych
+					</ul>	
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Single Table</h3>
+				<h3>Strategie: Single Table</h3>
+					<ul>
+						<li>Podobne obiekty przechowywane są w jednej tabeli
+						<li>Rekordy rozróżniane są przez tzw. Dyskryminator
+						<li>Wydajne wyszukiwanie – brak złączeń
+						<li>Puste kolumny (różnice między obiektami)
+						<li>Problem z warunkiem Not-Null. 
+					</ul>	
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Single Table2</h3>
+				<h3>Strategie: Single Table</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+@Table(name = "AUTHOR")
+@DiscriminatorColumn(name = "TYPE", length = 6, 
+		discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class AuthorEntity  {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
+	
+    @Column(nullable = true, length = 30)
+    protected String nickName;
+
+}
+					</code></pre>			
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Single Table3</h3>
+				<h3>Strategie: Single Table</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+@DiscriminatorValue("WRITER")
+public class WriterEntity extends AuthorEntity  {
+
+    @Enumerated(EnumType.STRING)
+    private LiteraryGenre literaryGenre;
+	
+}
+					</code></pre>	
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Single Table4</h3>
+				<h3>Strategie: Single Table</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+@DiscriminatorValue("PROFES")
+public class ProfessorEntity extends AuthorEntity  {
+
+    @Column(nullable = true)
+    private String university;
+
+}
+					</code></pre>	
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Single Table DB</h3>
+				<h3>Strategie: Single Table</h3>
+				
+					
+				<img src="images/inheritance_single_table_db.png" style="background:none; border:none; box-shadow:none;">
+				
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Table per class</h3>
+				<h3>Strategie: Table per class</h3>
+					<ul>
+						<li>Oddzielna tabela bazy danych na jedną encję
+						<li>Brak porblemów z warunkami Not-Null
+						<li>Redundancja wspólnych atrybótów
+						<li>Niewydajne zapytania SQL przy zapytaniach polimorficznych 
+
+					</ul>
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Joined</h3>
+				<h3>Strategie: Joined</h3>
+					<ul>
+						<li>Bazowe obiekty zapisane są w jednej tabeli
+						<li>Różnice między obiektami zapisywane są w oddzielnych tabelach
+						<li>Znormalizowana baza danych
+						<li>Brak redundancji
+						<li>Wymagane złączenie tabel przy zapytaniach polimorficznych
+					</ul>
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Joined1</h3>
+				<h3>Strategie: Joined</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+@Table(name = "BOOK_EXEMPLAR")
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class BookExemplarEntity  {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    protected Long id;
+	
+    @Column(nullable = false, length = 15, unique = true)
+    protected String serialNumber;
+}
+
+					</code></pre>	
+				<img src="images/inheritance_joined_db_1.png" style="background:none; border:none; box-shadow:none;">
 				</section>
 				
 				<section>
-				<h3>TODO? - Strategie: Joined2</h3>
+				<h3>Strategie: Joined</h3>
+				<pre><code class="Java" data-trim>
+@Entity
+@Table(name = "PAPER_BOOK")
+@PrimaryKeyJoinColumn(name = "book_ex_id", referencedColumnName = "id")
+public class PaperBookExemplarEntity extends BookExemplarEntity  {
+
+    private int pagesCount;
+	
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaperSize paperSize;
+	
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private BookCover bookCover;
+}
+					</code></pre>	
+				<img src="images/inheritance_joined_db_2.png" style="background:none; border:none; box-shadow:none;">
 				</section>
 				
 				<section>
