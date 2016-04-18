@@ -577,23 +577,87 @@ public class AuthorEntity  {
 				</section>
 				
 				<section>
-				<h4>Cykl życia encji</h4>
-					...
+				<h3>Cykl życia encji</h3>
+					<ul>
+						<li>Adnotacje jako metadane opisujące mapowanie pomiędzy obiektem a bazą
+						<li>Cykle życia encji:
+						<ul>
+							<li><b>nowy</b> (new) - brak identyfikatora i powiązania z kontekstem persystencji
+							<li><b>zarządzany</b> (managed) – encja posiada ID i jest powiązana z kontekstem persystencji
+							<li><b>odłączony</b> (detached) – encja posiada ID ale nie jest powiązana z kontekstem persystencji
+							<li><b>usunięty</b> (removed) – tak jak zarządzany, ale oznaczona jako „do usunięcia”
+						</ul>
+					</ul>
 				</section>
 				
 				<section>
-				<h4>Listenery</h4>
-					...
+				<h3>Listenery</h3>
+					<ul>
+						<li><b>@PrePersist</b>
+						<li><b>@PostPersist    </b>
+						<li><b>@PreUpdate      </b>
+						<li><b>@PostUpdate     </b>
+						<li><b>@PostLoad       </b>
+						<li><b>@PreRemove      </b>
+						<li><b>@PostRemove     </b>
+					</ul>
 				</section>
 				
 				<section>
-				<h4>Listenery wewnątrz encji</h4>
-					...
+				<h3>Listenery wewnątrz encji</h3>
+					<pre><code class="Java" data-trim>
+@Entity
+@Table(name = "CUSTOMER_CARD")
+public class CustomerCardEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+	
+    @Column(nullable = false)
+    private String serialNumber;
+
+    @PrePersist
+    public void generateDefaultSerialNumber() {
+        serialNumber = new SerialNumberGenerator().generate();
+    }
+}
+					</code></pre>
 				</section>
 				
 				<section>
-				<h4>Listenery stand alone</h4>
-					...
+				<h3>Listenery stand alone</h3>
+					<pre><code class="Java" data-trim>
+@Entity
+@Table(name = "CUSTOMER_CARD")
+@EntityListeners(CustomerCardListener.class)
+public class CustomerCardEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+	
+    @Column(nullable = false)
+    private String serialNumber;
+
+}
+					</code></pre>
+				</section>
+				
+				<section>
+				<h3>Listenery stand alone</h3>
+					<pre><code class="Java" data-trim>
+public class CustomerCardListener  {
+
+    @PrePersist
+    public void generateDefaultSerialNumber
+			(CustomerCardEntity customerCardEntity) {
+        String serialNumber = new SerialNumberGenerator().generate();
+        customerCardEntity.setSerialNumber(serialNumber);
+    }
+	
+}
+					</code></pre>
 				</section>
 				
 				<section>
