@@ -48,10 +48,10 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #333;
-  font-family: "Quicksand-Regular ", sans-serif;
+  font-family: "Cambria", sans-serif;
   font-weight: normal;
   line-height: 1.2;
-  letter-spacing: -0.08em;
+  letter-spacing: +0.12em;
   text-transform: uppercase;
   text-shadow: none;
   word-wrap: break-word; }
