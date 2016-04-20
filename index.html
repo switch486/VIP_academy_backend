@@ -294,47 +294,89 @@ public class CustomerServiceImpl {
 				<h3>TODO- TSZALA? - Spring boot / embedded vs Classical Server</h3>
 				</section>
 				
-				
-				<!--     ZADANIE DO WYKONANIA start.spring.io     wyklikanie spring.io i rest z hello world -->
+				<!--     ZADANIE DO WYKONANIA 
+					a.	Wygenerować projekt na stronie start.spring.io z zależnością na „Web”
+					b.	Rozpakować plik Zip do workspace w IDE
+					c.	Otworzyć IDE
+					d.	File->Import->Existing Maven Projects, wybrać lokalizację rozpakowanego projektu
+					e.	Dodać klasę z kontrolerem REST, metodą zwracającą String „Hello World” oraz mappingiem URL
+					f.	Skonfigurować port dla serwera -> application.properties
+					g.	Uruchomić klasę DemoApplication
+					h.	Przejść na stronę localhost:<port>/<mapping url> i sprawdzić działanie
+				-->
 				<section>
-				<h3>TODO? - zadanie do wykonania</h3>
-				wyklikanie spring.io i rest z hello world
+					<h4>ZADANIE: HelloWorld @ SpringBoot</h4>
+					<small>
+					<ol>
+						<li>Wygenerować projekt na stronie start.spring.io z zależnością na „Web”
+						<li>Rozpakować plik Zip do workspace w IDE
+						<li>Otworzyć IDE
+						<li>File->Import->Existing Maven Projects, wybrać lokalizację rozpakowanego projektu
+						<li>Dodać klasę z kontrolerem REST, metodą zwracającą String „Hello World” oraz mappingiem URL
+						<li>Skonfigurować port dla serwera -> application.properties
+						<li>Uruchomić klasę DemoApplication
+						<li>Przejść na stronę localhost:&lt;port&gt;/&lt;mapping url&gt; i sprawdzić działanie
+					</ol>
+					</small>
 				</section>
-				
 				
 				<!--     Architektura wielowarstwowa     -->
 				<section>
-				<h3>TODO? - Architektura wielowarstwowa 1</h3>
-				service repository, ... 
+					<h3>TODO? - Architektura wielowarstwowa 1</h3>
+					service repository, ... 
 				</section>
+				
 				<section>
-				<h3>TODO? - Architektura wielowarstwowa 2</h3>
-				service repository, ... 
+					<h3>TODO? - Architektura wielowarstwowa 2</h3>
+					service repository, ... 
 				</section>
 				
 				
 				<!--     RESTful Services     -->
 				<section>
-				<h3>TODO? - RESTful Services 1</h3>
-				ksiazka 4
+					<h3>TODO? - RESTful Services 1</h3>
+					ksiazka 4
 				</section>
 				<section>
-				<h3>TODO? - RESTful Services 2</h3>
-				ksiazka 4
+					<h3>TODO? - RESTful Services 2</h3>
+					ksiazka 4
 				</section>
 				<section>
-				<h3>TODO? - RESTful Services 3</h3>
-				ksiazka 4
+					<h3>TODO? - RESTful Services 3</h3>
+					ksiazka 4
 				</section>
 				<section>
-				<h3>TODO? - RESTful Services 4</h3>
-				ksiazka 4
+					<h3>TODO? - RESTful Services 4</h3>
+					ksiazka 4
 				</section>
 				
 				
-				<!--     ZADANIE DO WYKONANIA Rest      -->
+				<!--     ZADANIE DO WYKONANIA Rest 
+					a.	Przejść na branch step-2
+					b.	Uruchomić aplikację poprzez klasę BooksServerApplication
+					c.	Zwrócić uwagę na komunikat błędu i dodać brakującą implementację dla BookService
+					d.	Ponownie uruchomić aplikację
+					e.	W przeglądarce przejść na stronę localhost:8888/services/books?title=<tytul>&author=<author>
+					f.	Zweryfikować wynik
+					g.	Doimplementować listę książek i metodę wyszukiwania w tej liście
+					h.	Ponownie wystartować aplikację i przejść na stronę localhost:8888/services/books?title=<tytul>&author=<author>
+					i.	Poprzez różne wartości dla parametrów tytuł i autor zweryfikować działanie wyszykiwania.
+				-->
 				<section>
-				<h3>TODO? - zadanie do wykonania Lista obiektow, bez polaczenia z baza</h3>
+					<h4>ZADANIE: have a REST... Service</h4>
+					<small>
+					<ol>
+						<li>Przejść na branch step-2
+						<li>Uruchomić aplikację poprzez klasę BooksServerApplication
+						<li>Zwrócić uwagę na komunikat błędu i dodać brakującą implementację dla BookService
+						<li>Ponownie uruchomić aplikację
+						<li>W przeglądarce przejść na stronę <i>localhost:8888/services/books?title=&lt;tytul&gt;&author=&lt;author&gt;</i>
+						<li>Zweryfikować wynik
+						<li>Doimplementować listę książek i metodę wyszukiwania w tej liście
+						<li>Ponownie wystartować aplikację i przejść na stronę <i>localhost:8888/services/books?title=&lt;tytul&gt;&author=&lt;author&gt;</i>
+						<li>Poprzez różne wartości dla parametrów tytuł i autor zweryfikować działanie wyszykiwania.
+					</ol>
+					</small>
 				</section>
 				
 				
@@ -412,8 +454,6 @@ public class LibraryRowMapper implements RowMapper&lt;LibraryTO&gt; {
       return null;
    }
 					</code></pre>				
-				
-					
 				</section>
 				
 				<section>
@@ -798,8 +838,6 @@ emf.close();
 						<li>Podstawowy element całej warstwy persystencji
 						<li>Zarządza transakcjami i encjami
 					</ul>
-				
-				
 									<pre><code class="Java" data-trim>
 // zapis
 Product banan = new Product(1, "banan", "owoce");
@@ -1085,11 +1123,8 @@ public class ProfessorEntity extends AuthorEntity  {
 				</section>
 				
 				<section>
-				<h3>Strategie: Single Table</h3>
-				
-					
-				<img src="images/inheritance_single_table_db.png" style="background:none; border:none; box-shadow:none;">
-				
+					<h3>Strategie: Single Table</h3>
+					<img src="images/inheritance_single_table_db.png" style="background:none; border:none; box-shadow:none;">
 				</section>
 				
 				<section>
@@ -1129,7 +1164,6 @@ public abstract class BookExemplarEntity  {
     @Column(nullable = false, length = 15, unique = true)
     protected String serialNumber;
 }
-
 					</code></pre>	
 				<img src="images/inheritance_joined_db_1.png" style="background:none; border:none; box-shadow:none;">
 				</section>
@@ -1156,9 +1190,24 @@ public class PaperBookExemplarEntity extends BookExemplarEntity  {
 				<img src="images/inheritance_joined_db_2.png" style="background:none; border:none; box-shadow:none;">
 				</section>				
 				
-				<!--     ZADANIE DO WYKONANIA BookEntity      -->				
+				<!--     ZADANIE DO WYKONANIA BookEntity 
+					a.	Przejść na branch step-3
+					b.	Zaznajomić się z modelem encji
+					c.	Uruchomić test BookServiceImplTest i sprawdzić wyniki
+					d.	Poprawić mapowanie JPA dla encji
+					e.	Uruchomić ponownie test BookServiceImplTest i zweryfikować poprawność wszystkich przypadków testowych
+				-->				
 				<section>
-				<h3>TODO? - ZADANIE DO WYKONANIA - 5 tabel - uzupełnianie adnotacji (autor, ...)</h3>
+					<h4>ZADANIE: Annotation processing</h4>
+					<small>
+					<ol>
+						<li>Przejść na branch step-3
+						<li>Zaznajomić się z modelem encji
+						<li>Uruchomić test BookServiceImplTest i sprawdzić wyniki
+						<li>Poprawić mapowanie JPA dla encji
+						<li>Uruchomić ponownie test BookServiceImplTest i zweryfikować poprawność wszystkich przypadków testowych
+					</ol>
+					</small>
 				</section>
 				
 				
@@ -1256,9 +1305,20 @@ public class LibraryDaoImpl extends AbstractDao&lt;LibraryEntity&gt; {
 				
 				
 				
-				<!--     ZADANIE DO WYKONANIA BookDao      -->	
+				<!--     ZADANIE DO WYKONANIA BookDao  
+					a.	Przejść na branch step-4
+					b.	Zrealizuj wyszukiwanie książek dla zadanych kryteriów z wykorzystaniem Criteria API
+					c.	Podążaj za wskazówkami prowadzącego. (live coding)
+				-->	
 				<section>
-				<h3>TODO? - ZADANIE DO WYKONANIA book search criteria</h3>
+					<h4>ZADANIE: Find it</h4>
+					<small>
+					<ol>
+						<li>Przejść na branch step-4
+						<li>Zrealizuj wyszukiwanie książek dla zadanych kryteriów z wykorzystaniem Criteria API
+						<li>Podążaj za wskazówkami prowadzącego. (live coding)
+					</ol>
+					</small>
 				</section>
 				
 				
@@ -1342,9 +1402,24 @@ public class LibraryServiceImpl implements LibraryService {
 				</section>
 				
 				
-				<!--     ZADANIE DO WYKONANIA BookService      -->
+				<!--     ZADANIE DO WYKONANIA BookService   
+					a.	Przejść na branch step-5
+					b.	Zaimplementuj metodę save w klasie BookServiceImpl
+					c.	Zaimplementuj mapper przepisujący atrybuty z obiektu TO do encji.
+					d.	Zapewnij transakcyjność metody używając w odpowiednim miejscu adnotacji @Transactional
+					e.	Zweryfikuj działanie testów BookServiceImplTest
+				-->
 				<section>
-				<h3>TODO? - Zadanie do wykonania - mapper, transakcje, zapis w bazie?</h3>
+					<h4>ZADANIE: Save it</h4>
+					<small>
+					<ol>
+						<li>Przejść na branch step-5
+						<li>Zaimplementuj metodę save w klasie BookServiceImpl
+						<li>Zaimplementuj mapper przepisujący atrybuty z obiektu TO do encji.
+						<li>Zapewnij transakcyjność metody używając w odpowiednim miejscu adnotacji @Transactional
+						<li>Zweryfikuj działanie testów BookServiceImplTest
+					</ol>
+					</small>
 				</section>
 				
 				
@@ -1355,16 +1430,29 @@ public class LibraryServiceImpl implements LibraryService {
 				</section>
 				
 				
-				<!--     ZADANIE DO WYKONANIA Mockito      -->
+				<!--     ZADANIE DO WYKONANIA Mockito  
+					a.	Przejść na branch step-6
+					b.	Zapoznaj się z implementacją BookRestServiceTest
+					c.	Brakuje w niej implementacji pewnych testów.
+					d.	Dodaj ciała brakujących testów bazując na przykładach pozostałych metod.
+				-->
 								
 				<section>
-				<h3>TODO? - ZADANIE DO WYKONANIA, MOCKMVC, </h3>
+					<h4>ZADANIE: Test it</h4>
+					<small>
+					<ol>
+						<li>Przejść na branch step-6
+						<li>Zapoznaj się z implementacją BookRestServiceTest
+						<li>Brakuje w niej implementacji pewnych testów.
+						<li>Dodaj ciała brakujących testów bazując na przykładach pozostałych metod.
+					</ol>
+					</small>
 				</section>
 				
 				
 				
 				
-				<!-- TODO
+				<!-- TO DO
 				19.	Optimistic Locking 
 				20.	Zapytania polimorficzne
 				21.	Query DSL
