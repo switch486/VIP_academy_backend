@@ -322,13 +322,40 @@ public class CustomerServiceImpl {
 				
 				<!--     Architektura wielowarstwowa     -->
 				<section>
-					<h3>TODO? - Architektura wielowarstwowa 1</h3>
-					service repository, ... 
+					<h3>Architektura wielowarstwowa</h3>
+					Efekt zastosowania SRP (Single Responsibility Principle)
+					<table>
+						<thead>
+							<tr>
+								<th>Rola</th>
+								<th>Nazwa Warstwy</th>
+								<th>Odpowiedzialność</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Komunikacja FrontEnd</td>
+								<td>REST Service</td>
+								<td>tłumaczenie requestów</td>
+							</tr>
+							<tr>
+								<td>Use Case</td>
+								<td>Service</td>
+								<td>logika biznesowa</td>
+							</tr>
+							<tr>
+								<td>Baza danych</td>
+								<td>Repository / DAO</td>
+								<td>persystencja</td>
+							</tr>
+						</tbody>
+					</table>
 				</section>
 				
 				<section>
-					<h3>TODO? - Architektura wielowarstwowa 2</h3>
-					service repository, ... 
+					<h3>Architektura wielowarstwowa</h3>
+					Czym jest Repository:
+					<p><i>A Repository represents all objects of a certain type as a conceptual set. It acts like a collection, except with more elaborate querying capability.</i>[DDD]</p>
 				</section>
 				
 				
@@ -1294,15 +1321,15 @@ public class LibraryDaoImpl extends AbstractDao&lt;LibraryEntity&gt; {
 				</section>	
 				
 				<section>
-				<h4>Obiekty DAO</h4>
+				<h3>Obiekty DAO</h3>
 					<ul>
 						<li>Stanowią interfejs do komunikacji aplikacji z bazą danych
 						<li>Nie zawierają logiki biznesowej
 						<li>Oddzielają logikę biznesową od dostępu do danych
 						<li>Powodują powstanie kolejnej warsty w aplikacji
 					</ul>
+					<p class="fragment">No to jaka właściwie jest różnica między DAO a Repository?</p>
 				</section>
-				
 				
 				
 				<!--     ZADANIE DO WYKONANIA BookDao  
@@ -1449,7 +1476,13 @@ public class LibraryServiceImpl implements LibraryService {
 					</small>
 				</section>
 				
-				
+												
+				<section>
+					<h2>Pytania ?</h2>
+					
+					<h2>Feedback !</h2>
+					
+				</section>
 				
 				
 				<!-- TO DO
