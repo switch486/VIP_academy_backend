@@ -239,10 +239,48 @@ public class CustomerServiceImpl {
 				
 				<!--     Maven     -->
 				<section>
-				<h3>TODO- TSZALA? - Maven</h3>
+				<h3>Maven</h3>
+                    <ul>
+                      <li>Cel - Automatyzacja i standaryzacja procesu budowania</li>
+                      <li>Umożliwia opis procesu budowania oprogramowania</li>
+                      <li>Pozwala na zdefiniowanie zależności oraz zarządzanie nim</li>
+                      <li>Centralne repozytorium artefaktów - search.maven.org</li>
+                      <li>Lokalne repozytorium - zdef</li>
+                    </ul>
 				</section>
+                <section>
+                  <h3>Struktura projektu - convention over configuration</h3>
+                  <img src="images/mvn.png" style="background:none; border:none; box-shadow:none;">
+                </section>
+              
+                <section>
+                  <h3>Konfiguracja projektu - POM (Project Object Model)convention over configuration</h3>
+                  <img src="images/pom.png" style="background:none; border:none; box-shadow:none;">
+                </section>
+              
+                <section>
+                  <h3>Maven build lifecycle</h3>
+                  <ul>
+                      <li>Zadania wykonaywane kaskadowo - wykonanie konkretnego kroku powoduje również wykonanie wszystkich poprzedzających</li>
+                      <li>mvn compile</li>
+                      <li>Deweloper najczęściej używa mvn clean install</li>
+                      <li>Poszczególne pluginy korzystają ze zdefiniownaych faz w celu wykonania własnej akcji, np. mvn surefire:test</li>
+                  </ul>
+                  <img src="images/mvn_build.png" style="background:none; border:none; box-shadow:none;">
+                </section>
 				
-				
+			    <section>
+                  <h3>Zarządzanie zależnościami - dependency management</h3>
+                  <ul>
+                      <li>Każda biblioteka posiada unikalny identyfikator - groupId, artifactId, version</li>
+                      <li>Plik pom.xml zawiera sekcję dependencyManagement z listą zależności</li>
+                      <li>Zależności są aktualizowane w procesie budowania</li>
+                      <li>Centralne repozytorium artefaktów - search.maven.org</li>
+                      <li>Lokalne repozytorium - lokalizacja definiowana dla użytkownika</li>
+                    </ul>
+                  <img src="images/mvn_dependencies.png" style="background:none; border:none; box-shadow:none;">
+                </section>  	
+              
 				<!--     Spring Boot     -->								
 				<section>
 				<h3>TODO- TSZALA? - Spring boot</h3>
