@@ -206,8 +206,20 @@ public class CustomerServiceImpl {
 				</section>
 				
 				<section>
-				<h3>TODO? - Spring framework - podstawy</h3>
-				Przyklady z kodu z cwiczen?
+				<h3>Spring framework - podstawy</h3>
+				<pre><code class="Java" data-trim contenteditable>
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+@SpringBootApplication
+public class BooksServerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(BooksServerApplication.class, args);
+	}
+}
+					</code></pre>
 				</section>
 				
 				<section>
@@ -232,6 +244,28 @@ public class CustomerServiceImpl {
 						<li><b>@PostConstruct</b> - umożliwia wywołanie części kodu zaraz po utworzeniu obiektu
 						<li><b>@RequestMapping</b> - używana w kontrolerze, mapuje adres URL na metodę
 					</ul>
+				</section>
+				
+				<section>
+				<h3>Adnotacje - przykład</h3>
+				<pre><code class="Java" data-trim contenteditable>
+@RequestMapping("/services")
+@RestController
+public class BooksRestService {
+
+    private final BookService bookService;
+
+    @Autowired
+    public BooksRestService(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    @RequestMapping(path = "/books", method = RequestMethod.GET)
+    public List&lt;BookTo&gt; findBooks(BookSearchCriteria bookSearchCriteria) {
+        return bookService.findBooks(bookSearchCriteria);
+    }
+}
+					</code></pre>
 				</section>
 				
 				
@@ -441,9 +475,24 @@ public class CustomerServiceImpl {
 					</table>
 				</section>
 				<section>
-					<h3>RESTful API</h3>
-					TODO
-					przykłady
+					<h3>RESTful API</h3>					
+				<pre><code class="Java" data-trim contenteditable>
+@RequestMapping(path = "/cars", method = RequestMethod.GET)
+public List&lt;CarTo&gt; findAllCars() { ... }
+
+@RequestMapping(path = "/car", method = RequestMethod.POST)
+public CarTo addCar(@RequestBody CarTo car) { ... }
+
+@RequestMapping(path = "/car", method = RequestMethod.PUT)
+public CarTo updateCar(@RequestBody CarTo car) { ... }
+
+@RequestMapping(path = "/car/{id}", method = RequestMethod.DELETE)
+public boolean deleteCar(@PathVariable("id") Long id) { ... }
+					</code></pre>
+					<ul>
+						<li><a href="http://www.thomas-bayer.com/sqlrest/CUSTOMER/1">Przykład GET 1</a>
+						<li><a href="http://jsonplaceholder.typicode.com/posts/1/comments">Przykład GET 2</a>
+					</ul>
 				</section>
 				
 				
