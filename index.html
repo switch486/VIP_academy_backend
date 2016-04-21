@@ -69,7 +69,7 @@
 						<li>                          7:00 - 7:30 sniadanie
 						<li><span class="agendaEvent">7:30 - 12:00 praca w streamach</span>
 						<li>                          12:00 - 13:30 obiad
-						<li>                          13:30 - 16:00 przerwa - 
+						<li>                          13:30 - 16:00 przerwa 
 						<li>                          16:00 - 18:00 drugi wykład 
 						<li><span class="agendaEvent">18:00 - 20:30 praca w streamach</span>
 						<li>                          20:30 - kolacja grilowa
@@ -81,26 +81,26 @@
 					<ul>
 						<li>                          6:00 - 6:40 rozgrzewka
 						<li>                          7:00 - 7:30 sniadanie
-						<li><span class="agendaEvent">7:30 - 12:00 Praca w streamach</span>
-						<li>                          12:00 -13:00 obiad
-						<li>                          13:00 -15:00 Podsumowanie i zakończenie
+						<li><span class="agendaEvent">7:30 - 12:00 praca w streamach</span>
+						<li>                          12:00 - 13:00 obiad
+						<li>                          13:00 - 15:00 podsumowanie i zakończenie
 					</ul>
 				</section>
 
 				<section>
 					<h2>Agenda Właściwa</h2>
 					<ol>
-						<li><a href="#/2">Spring Framework</a></li>
-						<li><a href="#/2">Maven</a></li>
-						<li><a href="#/3">Spring Boot</a></li>
-						<li><a href="#/4">Architektura wielowarstwowa</a></li>
-						<li><a href="#/5">RESTful Services</a></li>
-						<li><a href="#/6">Relacyjne bazy danych a świat obiektowy</a></li>
-						<li><a href="#/7">Dostęp do danych za pomocą JDBC</a></li>
-						<li><a href="#/8">Odwzorowanie obiektowo-relacyjne</a></li>
-						<li><a href="#/9">DAO</a></li>
-						<li><a href="#/10">Transakcje</a></li>
-						<li><a href="#/11">Testy</a></li>
+						<li><a href="#/5">Spring Framework</a></li>
+						<li><a href="#/17">Maven</a></li>
+						<li><a href="#/22">Spring Boot</a></li>
+						<li><a href="#/27">Architektura wielowarstwowa</a></li>
+						<li><a href="#/29">RESTful Services</a></li>
+						<li><a href="#/34">Relacyjne bazy danych a świat obiektowy</a></li>
+						<li><a href="#/35">Dostęp do danych za pomocą JDBC</a></li>
+						<li><a href="#/39">Odwzorowanie obiektowo-relacyjne</a></li>
+						<li><a href="#/80">DAO</a></li>
+						<li><a href="#/86">Transakcje</a></li>
+						<li><a href="#/92">Testy</a></li>
 					</ol>
 				</section>
 				
@@ -174,6 +174,16 @@ private String zmienna;
 					</ul>
 				</section>
 				
+				<section>
+				<h3>Słyszałem / wygooglowałem że Spring to głównie konfiguracje XMLowe</h3>
+					<ul> 	
+						<li>Tak było kiedyś, teraz większość podstawowych konstrukcji może bez problemu być konfigurować za pomocą adnotacji</li>
+						<li>Konfiguracje poprzez XML cały czas działają</li>
+					</ul>
+					<p class="fragment">
+					Ale adnotacje w tej prezentacji nie są Interfejsami tylko Springowymi, ale też należącymi JPA i Hibernate.
+					</p>
+				</section>
 				
 				<section>
 					<h3>Inversion of Control, Dependency Injection</h3>
@@ -369,7 +379,7 @@ public class BooksRestService {
 				-->
 				<section>
 					<h4>ZADANIE: HelloWorld @ SpringBoot</h4>
-					<small>k
+					<small>
 					<ol>
 						<li>Wygenerować projekt na stronie start.spring.io z zależnością na „Web”
 						<li>Rozpakować plik Zip do workspace w IDE
@@ -687,12 +697,14 @@ public class LibraryRowMapper implements RowMapper&lt;LibraryTO&gt; {
 				</section>
 				
 				<section>
-				<h3>TODO? - Hibernate a JPA</h3>
+				<h3>Hibernate a JPA</h3>
+				<ul>
+					<li>JPA - Java Persistence API
+					<li>Hibernate jest implementacją JPA
+					<li>Tak długo jak w projekcie używa się Hibernate można z jego adnotacji korzystać zamiennie z adnotacjami JPA
+					<li>Jeśli planujemy kiedyś zmienić ORM, to warto ograniczyć się do adnotacji JPA
 				</section>
-				
-				<section>
-				<h3>TODO? - Mapowanie JPA</h3>
-				</section>
+				</ul>
 				
 				<section>
 				<h3>Encja a <b>POJO</b></h3>
@@ -1055,7 +1067,7 @@ public class Address {
 public class User {
 
 	@OneToOne
-	@JoinColumn(name = "BOOK_FK")
+	@JoinColumn(name = "ADDRESS_FK")
 	private Address address;
 }
 
@@ -1117,7 +1129,7 @@ public class User {
 public class Address {
 
 	@ManyToOne
-	@JoinColumn(name = "BOOK_FK", nullable = false)
+	@JoinColumn(name = "ADDRESS_FK", nullable = false)
 	private User user;
 }
 					</code></pre>
@@ -1137,11 +1149,11 @@ public class User {
 		fetch = FetchType. LAZY) // default: EAGER    
 	@JoinTable(name = "USER_ADDRESS",
 		joinColumns = {@JoinColumn(
-			name = "BOOK_ID", 
+			name = "USER_ID", 
 			nullable = false, 
 			updatable = false)},
 		inverseJoinColumns = {@JoinColumn(
-			name = "AUTHOR_ID", 
+			name = "ADDRESS_ID", 
 			nullable = false, 
 			updatable = false)})
 	private Collection&lt;Address&gt; addresses;
@@ -1155,7 +1167,7 @@ public class User {
 @Entity
 public class Address {
 
-    @ManyToMany(mappedBy = "book")
+    @ManyToMany(mappedBy = "user")
     private Collection&lt;User&gt; users;
 }
 					</code></pre>
@@ -1518,7 +1530,6 @@ em.getTransaction().rollback();
 
 				<section>
 				<h4>@Transactional</h4>
-				
 									<pre><code class="Java" data-trim>
 @Service
 @Transactional(readOnly = true)
@@ -1537,11 +1548,7 @@ public class LibraryServiceImpl implements LibraryService {
 	}
 }
 					</code></pre>
-				</section>				
-				
-				<section>
-				<h3>TODO? - Przyklad z XMLem?</h3>
-				</section>
+				</section>	
 										
 				<section>
 				<h3>Flyway</h3>
