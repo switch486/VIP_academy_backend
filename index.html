@@ -54,11 +54,10 @@
 						<li>                          12.00 - 13.30 pierwszy wykład
 						<li>                          13:30 - 14:15 obiad
 						<li><span class="agendaEvent">14:15 - 16:30 praca w streamach 1</span>
-						<li>                          16:30 - 17:00 przerwa z survivalowcem 
+						<li>                          16:30 - 17:00 przerwa 
 						<li><span class="agendaEvent">17:00 - 19.00 praca w streamach 2</span>
 						<li>                          19:00 - 20:00 kolacja
-						<li><span class="agendaEvent">20:00 - 22:30 praca w streamach 3</span>
-						<li>                          21:00 - bonus
+						<li><span class="agendaEvent">20:00 - 22:30 praca w streamach 3</span>				
 
 					</ul>
 				</section>
@@ -68,9 +67,9 @@
 					<ul>
 						<li>                          6:00 - 6:40 rozgrzewka
 						<li>                          7:00 - 7:30 sniadanie
-						<li><span class="agendaEvent">7:30 - 12:00 Praca w streamach</span>
+						<li><span class="agendaEvent">7:30 - 12:00 praca w streamach</span>
 						<li>                          12:00 - 13:30 obiad
-						<li>                          13:30 - 16:00 Survival w terenie 
+						<li>                          13:30 - 16:00 przerwa - 
 						<li>                          16:00 - 18:00 drugi wykład 
 						<li><span class="agendaEvent">18:00 - 20:30 praca w streamach</span>
 						<li>                          20:30 - kolacja grilowa
@@ -262,8 +261,8 @@ public class CustomerServiceImpl {
                   <ul>
                       <li>Zadania wykonywane kaskadowo - wykonanie konkretnego kroku powoduje również wykonanie wszystkich poprzedzających</li>
                       <li>mvn compile</li>
-                      <li>Deweloper najczęściej używa mvn clean install</li>
-                      <li>Poszczególne pluginy korzystają ze zdefiniownaych faz w celu wykonania własnej akcji, np. mvn surefire:test</li>
+                    <li>Deweloper najczęściej używa <b>mvn clean install</b></li>
+                    <li>Poszczególne pluginy korzystają ze zdefiniownaych faz w celu wykonania własnej akcji, np. <b>mvn surefire:test</b></li>
                   </ul>
                   <img src="images/mvn_build.png" style="background:none; border:none; box-shadow:none;">
                 </section>
@@ -282,15 +281,46 @@ public class CustomerServiceImpl {
               
 				<!--     Spring Boot     -->								
 				<section>
-				<h3>TODO- TSZALA? - Spring boot</h3>
+				<h3>Dlaczego Spring Boot?</h3>                    
+                  <img src="images/spring_summary.png" style="background:none; border:none; box-shadow:none;" >
+                  <h5>+ Konfiguracja = Aplikacja startowa</h5>
+				</section>				
+                <section>
+				<h3>Spring Boot</h3>                    
+                  <ul>
+                      <li>Convention over configuration</li>                      
+                      <li>Przy zerowej konfiguracji działająca aplikacja</li>
+                      <li>Prekonfiguracja możliwa dzięki adnotacjom @Conditional...</li>
+                      <li>Generator projektu - start.spring.io</li>
+                  </ul>
 				</section>				
 								
 				<section>
-				<h3>TODO- TSZALA? - Spring boot / Startery</h3>
+				<h3>Spring boot / Startery</h3>
+                  <ul>
+                      <li>Zestawy zależności udostępniające prekonfigurowane funkcje Springa</li>                      
+                      <li>Np. dla aplikacji bazodanowej: <pre><code>spring-boot-starter-data-jpa</code></pre></li>
+                      <li>Lista starterów -> <a href='https://github.com/spring-projects/spring-boot/tree/master/spring-boot-starters'>spring-boot-starters</a></li>                    
+                      <li>Jak użyc? -> pom.xml</li>                      
+    <pre><code class="Xml">    &lt;dependency&gt;
+      &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+      &lt;artifactId&gt;spring-boot-starter-tomcat&lt;/artifactId&gt;
+      &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;</code></pre>
+                  </ul>
 				</section>				
 								
 				<section>
-				<h3>TODO- TSZALA? - Spring boot / embedded vs Classical Server</h3>
+				<h3>Deployment aplikacji Spring Boot</h3>
+                  <ul>
+                      <li>Embedded Server</li>                      
+                    <ol><li>Przy użyciu np. startera <pre><code class="Xml">spring-boot-starter-web</code></pre>
+                      jar wynikowy (mvn clean install) zawiera jary Tomcata</li>
+                    <li>Start klasy aplikacji uruchamia wbudowanego Tomcata (możliwe jest również użycie Jetty)</li>
+                    </ol>  
+                      <li>Klasyczny serwer J2EE lub zewnętrzny Tomcat</li>
+                      Zmiana pliku docelowego na war, niewielkie zmiany w pom.xml
+                  </ul>
 				</section>
 				
 				<!--     ZADANIE DO WYKONANIA 
@@ -305,7 +335,7 @@ public class CustomerServiceImpl {
 				-->
 				<section>
 					<h4>ZADANIE: HelloWorld @ SpringBoot</h4>
-					<small>
+					<small>k
 					<ol>
 						<li>Wygenerować projekt na stronie start.spring.io z zależnością na „Web”
 						<li>Rozpakować plik Zip do workspace w IDE
